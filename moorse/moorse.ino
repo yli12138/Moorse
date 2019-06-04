@@ -6,6 +6,8 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 const int push = 0, de = 1;
 const int ledPin = 8;
 
+int buttonState = 0;
+
 void setup() {
   // set up the LCD's number of columns and rows:
   lcd.begin(16, 2);
@@ -22,10 +24,10 @@ void loop() {
   if (buttonState == HIGH) {
     //digitalWrite(ledPin, HIGH);
     lcd.setCursor(0, 1);
-    lcd.print(pushing);
+    lcd.print("released");
   } else {
     //digitalWrite(ledPin, LOW);
     lcd.setCursor(0, 1);
-    lcd.print(released);
+    lcd.print("pushing");
   }
 }
