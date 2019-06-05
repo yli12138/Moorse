@@ -8,6 +8,10 @@ const int ledPin = 8;
 
 int buttonState = 0;
 
+int cursorTrans = 0;
+int cursorChecker = 0;
+int seconds = 0;
+
 void setup() {
   // set up the LCD's number of columns and rows:
   lcd.begin(16, 2);
@@ -23,11 +27,31 @@ void loop() {
   
   if (buttonState == HIGH) {
     //digitalWrite(ledPin, HIGH);
+    lcd.clear();
+    
     lcd.setCursor(0, 1);
     lcd.print("released");
+
+    cursorTrans = 0;
+    cursorChecker = cursorTrans;
   } else {
     //digitalWrite(ledPin, LOW);
+    if(cursorChecker == cursorTrans){
+      lcd.clear();
+      seconds = millis();
+      cursorChecker --;
+    }
+    
     lcd.setCursor(0, 1);
     lcd.print("pushing");
+
+    int current = millis() - seconds;
+    if(1900 < current && current < 2100){
+      lcd.setCursor(cursorTrans,0);
+      lcd.print("-");
+      cursorTrans ++;
+      seconds = millis();
+    }
   }
+  
 }
