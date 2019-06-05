@@ -46,7 +46,7 @@ void loop() {
     lcd.print("pushing");
 
     int current = millis() - seconds;
-    if(1900 < current && current < 2100){
+    if(900 < current && current < 1100){
       lcd.setCursor(cursorTrans,0);
       lcd.print("-");
       cursorTrans ++;
