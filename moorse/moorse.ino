@@ -29,9 +29,8 @@ void loop() {
     //digitalWrite(ledPin, HIGH);
     lcd.clear();
     
-    lcd.setCursor(0, 1);
-    lcd.print("released");
-
+//    lcd.setCursor(0, 1);
+//    lcd.print("released");
     cursorTrans = 0;
     cursorChecker = cursorTrans;
   } else {
