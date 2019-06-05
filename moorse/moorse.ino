@@ -3,10 +3,13 @@
 const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
-const int push = 0, de = 1;
+const int push = 0, sendButton = 1;
 const int ledPin = 8;
 
 int buttonState = 0;
+
+String currentLine = "";
+String oldLine = "";
 
 int cursorTrans = 0;
 int cursorChecker = 0;
@@ -14,12 +17,26 @@ int seconds = 0;
 
 const int unit = 500;
 
+void sendLine(){
+  oldLine = currentLine;
+  currentLine = "";
+
+  lineUpDate();
+}
+
+void lineUpDate(){//call after sendLine
+  lcd.clear();
+  
+  lcd.setCursor(0,0);
+  lcd.print(oldLine);
+}
+
 void setup() {
   // set up the LCD's number of columns and rows:
   lcd.begin(16, 2);
 
   pinMode(push, INPUT);
-  pinMode(de, INPUT);
+  pinMode(sendButton, INPUT);
 
   //pinMode(ledPin, OUTPUT);
 }
