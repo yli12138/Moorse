@@ -12,6 +12,8 @@ int cursorTrans = 0;
 int cursorChecker = 0;
 int seconds = 0;
 
+const int unit = 500;
+
 void setup() {
   // set up the LCD's number of columns and rows:
   lcd.begin(16, 2);
@@ -45,7 +47,7 @@ void loop() {
     lcd.print("pushing");
 
     int current = millis() - seconds;
-    if(900 < current && current < 1100){
+    if(unit*2-100 < current && current < unit*2+100){
       lcd.setCursor(cursorTrans,0);
       lcd.print("-");
       cursorTrans ++;
