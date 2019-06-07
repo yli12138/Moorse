@@ -3,17 +3,14 @@
 const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
-const int push = 0, sendButton = 1;
+const int sendButton = 1;
 const int ledPin = 8;
 
 int buttonState = 0;
+int flexVal = 0;
 
 String currentLine = "";
 String oldLine = "";
-
-int cursorTrans = 0;
-int cursorChecker = 0;
-int seconds = 0;
 
 const int unit = 500;
 
@@ -35,41 +32,19 @@ void setup() {
   // set up the LCD's number of columns and rows:
   lcd.begin(16, 2);
 
-  pinMode(push, INPUT);
   pinMode(sendButton, INPUT);
 
   //pinMode(ledPin, OUTPUT);
 }
 
 void loop() {
-  buttonState = digitalRead(push);
+  buttonState = digitalRead(sendButton);
   
   if (buttonState == HIGH) {
-    //digitalWrite(ledPin, HIGH);
     lcd.clear();
-    
-//    lcd.setCursor(0, 1);
-//    lcd.print("released");
-    cursorTrans = 0;
-    cursorChecker = cursorTrans;
   } else {
     //digitalWrite(ledPin, LOW);
-    if(cursorChecker == cursorTrans){
-      lcd.clear();
-      seconds = millis();
-      cursorChecker --;
-    }
-    
-    lcd.setCursor(0, 1);
-    lcd.print("pushing");
-
-    int current = millis() - seconds;
-    if(unit*2-100 < current && current < unit*2+100){
-      lcd.setCursor(cursorTrans,0);
-      lcd.print("-");
-      cursorTrans ++;
-      seconds = millis();
-    }
-  }
-  
+    lcd.setCursor(0,0);
+    flexVal = analogRead(A0);
+    lcd.print(flexVal);
 }
