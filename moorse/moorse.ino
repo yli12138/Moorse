@@ -37,7 +37,7 @@ void loop() {
     pushMorseBuffer();
     clearedBuffer = true;
   }
-  
+
   int flexVal = analogRead(A0);
 
   if (flexVal <= flexThreshold) {
@@ -50,11 +50,11 @@ void loop() {
     }
   } else if (flexVal >= deleteThreshold) {
     // Deleting
-    if(flexDeleting == false) {
+    if (flexDeleting == false) {
       flexDeleting = true;
       millisDelete = millis();
     } else {
-      if(millis() - millisDelete >= deleteTime) {
+      if (millis() - millisDelete >= deleteTime) {
         deleteLastLetter();
         flexDeleting = false;
       }
@@ -77,7 +77,7 @@ void loop() {
       millisPause = millis();
     }
 
-    if(flexDeleting == true) {
+    if (flexDeleting == true) {
       flexDeleting = false;
     }
   }
@@ -98,9 +98,11 @@ void pushLetter(String letter) {
 }
 
 void deleteLastLetter() {
-  lcd.setCursor(cursorIndex - 1, 0);
-  lcd.print(" ");
-  cursorIndex--;
+  if (cursorIndex > 0) {
+    lcd.setCursor(cursorIndex - 1, 0);
+    lcd.print(" ");
+    cursorIndex--;
+  }
 }
 
 void pushMorseBuffer() {
