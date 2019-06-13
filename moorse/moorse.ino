@@ -224,6 +224,9 @@ void pushMorseBuffer() {
         }
       }
     }
+  } else {
+    // Space
+    pushLetter(" ");
   }
 
   memset(morseBuffer, 0, sizeof(morseBuffer));
